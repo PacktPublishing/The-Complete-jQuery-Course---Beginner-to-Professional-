@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> jQuery Memory Game </title>
+  <link rel="stylesheet" type="text/css" href="style.css"> </head>
+
+<body>
+  <div class="startBtn">Start Game</div>
+  <div class="dashboard">Clicks : <span class="score">0</span></div>
+  <div class="game"></div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
+
+
+CSS
+
+.startBtn {
+  position: absolute;
+  top: 125px;
+  left: 100px;
+  width: 200px;
+  z-index: 1;
+  background-color: red;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  font-size: 2em;
+}
+
+.dashboard {
+  font-family: sans-serif;
+  font-size: 2em;
+  background-color: black;
+  color: white;
+  width: 390px;
+  text-align: center;
+  padding: 5px;
+}
+
+.box {
+  width: 21%;
+  margin: 1%;
+  display: inline-block;
+  line-height: 80px;
+  text-align: center;
+  cursor: pointer;
+  padding: 1%;
+  box-shadow: 5px 5px #888;
+  height: 80px;
+}
+
+.back {
+  display: block;
+}
+
+.front {
+  display: none;
+}
+
+
+
+JS
+
+const boxes = ['red', 'blue', 'green', 'purple', 'yellow', 'pink', 'teal', 'gold'];
+//const boxes = ['red', 'blue'];
+const game = {};
+$('.startBtn').click(startGame);
+$('.game').on("click", ".active", function (event) {
+  console.log($(this).data('val'));
+  if (!game.pause) {
+    game.clicks++;
+    $('.score').text(game.clicks);
+    game.sel.push($(this));
+    $(this).removeClass('active');
+    $(this).find('.back').hide();
+    $(this).find('.front').show();
+    if (game.sel.length === 2) {
+      console.log(game.sel);
+      if (game.sel[0].data('val') == game.sel[1].data('val')) {
+        game.pause = false;
+        console.log('Match');
+        removeItems(game.sel[0].data('val'));
+        game.sel = [];
+        if (game.newArray.length == 0) {
+          console.log('GAME OVER');
+          gameOver();
+        }
+        //removeItems(game.sel[1].data('val'));
+      }
+      else {
+        game.pause = true;
+        game.timer = setInterval(hideCard, 1000);
+      }
+      //check match
+    }
+  }
+})
+
+function gameOver() {
+  console.log('*********GAMEOVER*********');
+  $('.startBtn').show();
+  $('.score').text('GAME OVER ' + game.clicks + ' clicks');
+}
+
+function removeItems(val) {
+  console.log(game.newArray);
+  game.newArray = game.newArray.filter(function (ele) {
+    return ele != val;
+  })
+  console.log(game.newArray);
+}
+
+function hideCard() {
+  console.log('no match');
+  flipper(game.sel[0]);
+  flipper(game.sel[1]);
+  clearInterval(game.timer);
+  game.sel = [];
+  game.pause = false;
+}
+
+function flipper(el) {
+  el.addClass('active');
+  el.find('.back').show();
+  el.find('.front').hide();
+}
+
+function arrayRandomize(arr) {
+  arr.sort(function () {
+    return .5 - Math.random();
+  })
+}
+
+function startGame() {
+  console.log('start');
+  $('.startBtn').hide();
+  game.clicks = 0;
+  game.pause = false;
+  game.sel = [];
+  game.newArray = boxes.concat(boxes);
+  console.log(game.newArray);
+  arrayRandomize(game.newArray);
+  $('.game').html('');
+  $.each(game.newArray, function (key, value) {
+    console.log(key);
+    console.log(value);
+    let box = $('<div>');
+    console.log(box);
+    box.addClass('box active');
+    box.data('cnt', key + 1);
+    box.data('val', value);
+    let back = $('<div>');
+    back.addClass('back');
+    back.html(key + 1);
+    box.append(back);
+    let front = $('<div>');
+    front.css('background-color', value);
+    front.text(value);
+    front.addClass('front');
+    box.append(front);
+    $('.game').append(box);
+  })
+}

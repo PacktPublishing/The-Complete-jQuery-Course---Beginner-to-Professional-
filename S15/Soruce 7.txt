@@ -1,0 +1,84 @@
+//const boxes = ['red', 'blue', 'green', 'purple', 'yellow', 'pink', 'teal', 'gold'];
+const boxes = ['red', 'blue'];
+const game = {};
+$('.startBtn').click(startGame);
+$('.game').on("click", ".active", function (event) {
+  console.log($(this).data('val'));
+  if (!game.pause) {
+    game.clicks++;
+    $('.score').text(game.clicks);
+    game.sel.push($(this));
+    $(this).removeClass('active');
+    $(this).find('.back').hide();
+    $(this).find('.front').show();
+    if (game.sel.length === 2) {
+      console.log(game.sel);
+      if (game.sel[0].data('val') == game.sel[1].data('val')) {
+        game.pause = false;
+        console.log('Match');
+        removeItems(game.sel[0].data('val'));
+        if (game.newArray.length == 0) {
+          console.log('GAME OVER');
+        }
+        //removeItems(game.sel[1].data('val'));
+      }
+      else {
+        game.pause = true;
+        game.timer = setInterval(hideCard, 100);
+      }
+      //check match
+    }
+  }
+})
+
+function removeItems(val) {
+  console.log(game.newArray);
+  game.newArray = game.newArray.filter(function (ele) {
+    return ele != val;
+  })
+  console.log(game.newArray);
+}
+
+function hideCard() {
+  console.log('no match');
+  clearInterval(game.timer);
+  game.sel = [];
+  game.pause = false;
+}
+
+function arrayRandomize(arr) {
+  arr.sort(function () {
+    return .5 - Math.random();
+  })
+}
+
+function startGame() {
+  console.log('start');
+  $('.startBtn').hide();
+  game.clicks = 0;
+  game.pause = false;
+  game.sel = [];
+  game.newArray = boxes.concat(boxes);
+  console.log(game.newArray);
+  arrayRandomize(game.newArray);
+  $('.game').html('');
+  $.each(game.newArray, function (key, value) {
+    console.log(key);
+    console.log(value);
+    let box = $('<div>');
+    console.log(box);
+    box.addClass('box active');
+    box.data('cnt', key + 1);
+    box.data('val', value);
+    let back = $('<div>');
+    back.addClass('back');
+    back.html(key + 1);
+    box.append(back);
+    let front = $('<div>');
+    front.css('background-color', value);
+    front.text(value);
+    front.addClass('front');
+    box.append(front);
+    $('.game').append(box);
+  })
+}

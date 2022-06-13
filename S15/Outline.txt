@@ -1,0 +1,45 @@
+jQuery Memory Game Project - Fun coding Project with jQuery
+Wanna play a game? How about learn to create one?  Create a web based memory game from scratch using jQuery
+
+Explore how you can use jQuery to create a fun interactive game from scratch.  
+
+Create this memory game which features dynamic content and can adjust with more items or less.  Source code is included and suggested to try the code as you follow the lessons.   Construct your own version of the game, then extend it and show off your skills.  Learn in a fun interactive way how to produce web content and build some cool things online with jQuery.
+
+Please note that HTML CSS and JavaScript are prerequisites to this course.
+
+Upon completion of the course you will be able to build a memory game from scratch.
+
+Course covers applying jQuery to build this mini project
+
+How to setup your development environment editor and where to connect to jQuery
+
+Game HTML and CSS structure
+
+Logic to develop the memory game
+
+Connecting to build a game board and starting the game
+
+Elements of the game
+
+Adding timer
+
+Checking for win conditions
+
+Moving the player to the next cards
+
+All this and more
+
+The memory game is a simple game that presents the player with a set of cards flipped over, 
+
+Objective of the game is to select 2 cards and try to find a match.
+
+As you flip cards over remember the other side to complete the game in as few clicks as possible.
+
+Game ends when all the cards are matched.
+
+Enjoy learning have fun!!!!
+
+Try the code for yourself and explore what you can do with JavaScript
+
+Fast Friendly support to help answer any questions you might have and to help clarify content is always available in the Q&A section.  Taught by an instructor with over 20 years real world experience ready to help you learn more.  Step by step training resources and source code is also included to get you started quickly.
+

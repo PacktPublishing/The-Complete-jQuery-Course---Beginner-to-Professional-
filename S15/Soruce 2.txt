@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> jQuery Memory Game </title>
+  <link rel="stylesheet" type="text/css" href="style.css"> </head>
+
+<body>
+  <div class="startBtn">Start Game</div>
+  <div class="dashboard">Clicks : <span class="score">0</span></div>
+  <div class="game"></div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
+
+
+CSS
+
+.startBtn {
+  position: absolute;
+  top: 125px;
+  left: 100px;
+  width: 200px;
+  z-index: 1;
+  background-color: red;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  font-size: 2em;
+}
+
+.dashboard {
+  font-family: sans-serif;
+  font-size: 2em;
+  background-color: black;
+  color: white;
+  width: 390px;
+  text-align: center;
+  padding: 5px;
+}
+
+.box {
+  width: 21%;
+  margin: 1%;
+  display: inline-block;
+  line-height: 80px;
+  text-align: center;
+  cursor: pointer;
+  padding: 1%;
+  box-shadow: 5px 5px #888;
+  height: 80px;
+}
+
+.back {
+  display: block;
+}
+
+.front {
+  display: none;
+}
+
